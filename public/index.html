@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Instagram • bongo_leaks_vip</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -135,6 +136,95 @@
             padding: 0 16px 16px;
             font-size: 14px;
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        .animate-scale-in {
+            animation: scaleIn 0.3s ease-out forwards;
+        }
+
+        .grid-item {
+            opacity: 0;
+            animation: fadeInUp 0.4s ease-out forwards;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease;
+        }
+
+        .highlight-item {
+            transition: transform 0.2s ease;
+        }
+
+        .highlight-item:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-icon {
+            transition: transform 0.15s ease;
+        }
+
+        .nav-icon:active {
+            transform: scale(0.9);
+        }
+
+        /* Reel Modal */
+        .reel-modal {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 200;
+            display: none;
+            flex-direction: column;
+        }
+
+        .reel-modal.show {
+            display: flex;
+        }
+
+        .reel-video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
     </style>
 </head>
 
@@ -155,10 +245,10 @@
                 <i class="far fa-heart"></i>
                 <span class="absolute top-0 right-0 bg-red-500 rounded-full w-2.5 h-2.5 border-2 border-black"></span>
             </button>
-            <button class="active-tap relative">
-                <i class="fab fa-facebook-messenger"></i>
+            <button class="active-tap relative nav-icon">
+                <i class="fa-regular fa-paper-plane text-[22px]"></i>
                 <span
-                    class="absolute -top-1 -right-1 bg-red-500 text-[10px] font-bold px-1 rounded-full border border-black">9</span>
+                    class="absolute -top-1.5 -right-2 bg-red-500 text-[10px] font-bold min-w-[18px] h-[18px] flex items-center justify-center px-1 rounded-full border-2 border-black">9</span>
             </button>
         </div>
     </nav>
@@ -232,42 +322,48 @@
             </div>
 
             <div class="flex gap-4 overflow-x-auto py-2 no-scrollbar mb-1">
-                <div class="flex flex-col items-center gap-1 cursor-pointer open-modal-trigger min-w-[64px]">
-                    <div class="story-ring-grey w-16 h-16 p-[2px]">
+                <div class="flex flex-col items-center gap-1 cursor-pointer highlight-trigger highlight-item min-w-[64px]"
+                    data-highlight="trending">
+                    <div class="story-ring w-16 h-16 p-[2px]">
                         <div class="w-full h-full rounded-full bg-[#1a1a1a] flex items-center justify-center"><span
                                 class="text-2xl">🔥</span></div>
                     </div>
                     <span class="text-[11px]">Trending</span>
                 </div>
-                <div class="flex flex-col items-center gap-1 cursor-pointer open-modal-trigger min-w-[64px]">
-                    <div class="story-ring-grey w-16 h-16 p-[2px]">
+                <div class="flex flex-col items-center gap-1 cursor-pointer highlight-trigger highlight-item min-w-[64px]"
+                    data-highlight="vip">
+                    <div class="story-ring w-16 h-16 p-[2px]">
                         <div class="w-full h-full rounded-full bg-[#1a1a1a] flex items-center justify-center"><span
                                 class="text-2xl">🔞</span></div>
                     </div>
                     <span class="text-[11px]">VIP Only</span>
                 </div>
-                <div class="flex flex-col items-center gap-1 cursor-pointer open-modal-trigger min-w-[64px]">
-                    <div class="story-ring-grey w-16 h-16 p-[2px]">
+                <div class="flex flex-col items-center gap-1 cursor-pointer highlight-trigger highlight-item min-w-[64px]"
+                    data-highlight="chuo">
+                    <div class="story-ring w-16 h-16 p-[2px]">
                         <div class="w-full h-full rounded-full bg-[#1a1a1a] flex items-center justify-center"><span
                                 class="text-2xl">🎓</span></div>
                     </div>
                     <span class="text-[11px]">Chuo</span>
                 </div>
-                <div class="flex flex-col items-center gap-1 cursor-pointer open-modal-trigger min-w-[64px]">
-                    <div class="story-ring-grey w-16 h-16 p-[2px]">
+                <div class="flex flex-col items-center gap-1 cursor-pointer highlight-trigger highlight-item min-w-[64px]"
+                    data-highlight="mpya">
+                    <div class="story-ring w-16 h-16 p-[2px]">
                         <div class="w-full h-full rounded-full bg-[#1a1a1a] flex items-center justify-center"><span
                                 class="text-2xl">🆕</span></div>
                     </div>
                     <span class="text-[11px]">Mpya</span>
                 </div>
-                <div class="flex flex-col items-center gap-1 cursor-pointer open-modal-trigger min-w-[64px]">
-                    <div class="story-ring-grey w-16 h-16 p-[2px]">
+                <div class="flex flex-col items-center gap-1 cursor-pointer highlight-trigger highlight-item min-w-[64px]"
+                    data-highlight="leaked">
+                    <div class="story-ring w-16 h-16 p-[2px]">
                         <div class="w-full h-full rounded-full bg-[#1a1a1a] flex items-center justify-center"><span
                                 class="text-2xl">💦</span></div>
                     </div>
                     <span class="text-[11px]">Leaked</span>
                 </div>
             </div>
+
         </header>
 
         <!-- Tab Navigation -->
@@ -294,8 +390,8 @@
         class="fixed bottom-0 w-full max-w-md bg-black border-t border-[#262626] flex justify-around items-center h-[48px] z-50 px-2">
         <button class="p-2 text-white active-tap flex-1 flex justify-center"><i
                 class="fas fa-home text-2xl"></i></button>
-        <button class="p-2 text-white active-tap flex-1 flex justify-center"><i
-                class="fas fa-search text-2xl font-light"></i></button>
+        <button class="p-2 text-white active-tap flex-1 flex justify-center nav-icon"><i
+                class="fas fa-magnifying-glass text-2xl"></i></button>
         <button class="p-2 text-white active-tap flex-1 flex justify-center"><i
                 class="far fa-plus-square text-2xl"></i></button>
         <button class="p-2 text-white active-tap flex-1 flex justify-center"><i
@@ -306,13 +402,7 @@
         </button>
     </nav>
 
-    <!-- Floating CTA -->
-    <div class="fixed bottom-[60px] left-4 right-4 z-40">
-        <button
-            class="open-modal-trigger w-full bg-[#0095f6] hover:bg-[#1877f2] text-white font-semibold py-3 rounded-lg shadow-lg flex items-center justify-center gap-2 text-sm active:scale-95 transition-transform">
-            <i class="fas fa-unlock"></i> Subscribe to see posts (TSH 1,000)
-        </button>
-    </div>
+
 
     <!-- POST VIEW MODAL (opens when clicking grid item) -->
     <div id="post-modal" class="post-modal">
@@ -340,8 +430,8 @@
             <!-- Payment Overlay (appears after 3 seconds) -->
             <div id="video-payment-overlay" class="video-payment-overlay">
                 <div
-                    class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] flex items-center justify-center">
-                    <i class="fas fa-lock text-white text-2xl"></i>
+                    class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] p-[2px] flex items-center justify-center overflow-hidden">
+                    <img src="logo.png" class="w-full h-full object-cover rounded-full">
                 </div>
                 <h2 class="text-xl font-bold mb-2">Video Imefungwa 🔒</h2>
                 <p class="text-gray-400 text-sm mb-4">Lipa TSH 1,000 kuona video zote</p>
@@ -442,8 +532,8 @@
 
             <div class="p-5 text-center">
                 <div
-                    class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] flex items-center justify-center">
-                    <i class="fas fa-lock text-white text-2xl"></i>
+                    class="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] p-[2px] flex items-center justify-center overflow-hidden">
+                    <img src="logo.png" class="w-full h-full object-cover rounded-full">
                 </div>
                 <h2 class="text-lg font-bold mb-1">Subscribe to VIP</h2>
                 <p class="text-gray-400 text-[13px] mb-4">Get full access to all exclusive videos</p>
@@ -476,6 +566,52 @@
                     </div>
                     <p class="font-bold text-sm">Waiting for payment...</p>
                     <p class="text-xs text-gray-400 mt-1">Check your phone</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reel Modal (for highlights) -->
+    <div id="reel-modal" class="reel-modal">
+        <div class="relative w-full h-full flex flex-col">
+            <div
+                class="absolute top-0 left-0 right-0 z-10 flex justify-between items-center p-4 bg-gradient-to-b from-black/80 to-transparent">
+                <div class="flex items-center gap-2">
+                    <img src="logo.png" class="w-8 h-8 rounded-full">
+                    <span class="font-semibold text-sm">bongo_leaks_vip</span>
+                    <span class="verified-badge"><i class="fas fa-check"></i></span>
+                </div>
+                <button id="close-reel" class="p-2"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <video id="reel-video" class="reel-video" loop playsinline></video>
+            <div id="reel-payment-overlay" class="video-payment-overlay">
+                <div
+                    class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-[#833ab4] via-[#fd1d1d] to-[#fcb045] p-[2px] overflow-hidden">
+                    <img src="logo.png" class="w-full h-full object-cover rounded-full">
+                </div>
+                <h2 class="text-xl font-bold mb-2">Video Imefungwa 🔒</h2>
+                <p class="text-gray-400 text-sm mb-4">Lipa TSH 1,000 kuona video zote</p>
+                <form id="reel-payment-form" class="w-full max-w-[280px] space-y-3">
+                    <div class="relative">
+                        <i class="fas fa-phone absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                        <input type="tel" id="reel-phone"
+                            class="w-full bg-[#1a1a1a] border border-[#363636] rounded-lg pl-10 pr-3 py-3 text-white text-sm focus:border-[#0095f6] focus:outline-none text-center"
+                            placeholder="07XXXXXXXX" required pattern="0[6-7][0-9]{8}" inputmode="numeric">
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-gradient-to-r from-[#833ab4] via-[#fd1d1d] to-[#fcb045] text-white font-bold py-3 rounded-lg text-sm flex items-center justify-center gap-2">
+                        <i class="fas fa-unlock"></i> LIPA SASA
+                    </button>
+                </form>
+                <div class="mt-3 flex items-center justify-center gap-2 text-[11px] text-gray-500">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>M-Pesa • Tigo Pesa • Airtel Money</span>
+                </div>
+                <div id="reel-waiting-view" class="hidden w-full mt-4">
+                    <div
+                        class="w-10 h-10 border-2 border-[#363636] border-t-[#0095f6] rounded-full animate-spin mx-auto mb-4">
+                    </div>
+                    <p class="font-semibold">Inasubiri malipo...</p>
                 </div>
             </div>
         </div>
@@ -537,7 +673,20 @@
             { src: "https://www.empressleak.xyz/media/videos/tmb/7144/video.webm", title: "Mchepuko live 🔴" }
         ];
 
+        // Fisher-Yates shuffle algorithm
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
+            // Shuffle videos on page load
+            const shuffledVideos = shuffleArray(videos);
+
             const videoListContainer = document.getElementById('video-list-container');
             const postModal = document.getElementById('post-modal');
             const postVideo = document.getElementById('post-video');
@@ -556,14 +705,36 @@
             const modalWaitingView = document.getElementById('modal-waiting-view');
             const modalPaymentForm = document.getElementById('modal-payment-form');
 
+            // Reel Modal elements
+            const reelModal = document.getElementById('reel-modal');
+            const reelVideo = document.getElementById('reel-video');
+            const closeReelBtn = document.getElementById('close-reel');
+            const reelPaymentOverlay = document.getElementById('reel-payment-overlay');
+            const reelPaymentForm = document.getElementById('reel-payment-form');
+            const reelWaitingView = document.getElementById('reel-waiting-view');
+
             let postPlayTimeout = null;
+            let reelPlayTimeout = null;
+            let currentModalType = null; // 'post', 'payment', 'reel'
+
+            // Back button handling
+            window.addEventListener('popstate', (e) => {
+                if (currentModalType === 'post') {
+                    closePost();
+                } else if (currentModalType === 'payment') {
+                    closePaymentModal();
+                } else if (currentModalType === 'reel') {
+                    closeReelModal();
+                }
+            });
 
             // Create grid item (small play icon top-right only)
             const createGridItem = (video, index) => {
                 const views = ((Math.random() * 500) + 50).toFixed(1) + 'K';
 
                 const card = document.createElement('div');
-                card.className = 'relative aspect-square bg-[#121212] overflow-hidden cursor-pointer active:opacity-70';
+                card.className = 'grid-item relative aspect-square bg-[#121212] overflow-hidden cursor-pointer active:opacity-70';
+                card.style.animationDelay = `${index * 50}ms`;
                 card.dataset.index = index;
 
                 card.innerHTML = `
@@ -602,10 +773,10 @@
                 return card;
             };
 
-            // Fill grid
+            // Fill grid with shuffled videos
             if (videoListContainer) {
                 videoListContainer.innerHTML = '';
-                videos.forEach((video, index) => {
+                shuffledVideos.forEach((video, index) => {
                     videoListContainer.appendChild(createGridItem(video, index));
                 });
             }
@@ -629,6 +800,8 @@
 
             // Open post view
             function openPost(video, index) {
+                history.pushState({ modal: 'post' }, '');
+                currentModalType = 'post';
                 postModal.classList.add('show');
                 document.body.style.overflow = 'hidden';
 
@@ -678,6 +851,7 @@
 
             // Close post view
             function closePost() {
+                currentModalType = null;
                 postModal.classList.remove('show');
                 document.body.style.overflow = '';
                 postVideo.pause();
@@ -700,6 +874,8 @@
 
             // Open payment modal (for other triggers)
             function openPaymentModal() {
+                history.pushState({ modal: 'payment' }, '');
+                currentModalType = 'payment';
                 paymentModal.classList.remove('hidden');
                 setTimeout(() => {
                     paymentBox.classList.remove('scale-95', 'opacity-0');
@@ -708,6 +884,7 @@
             }
 
             function closePaymentModal() {
+                currentModalType = null;
                 paymentBox.classList.remove('scale-100', 'opacity-100');
                 paymentBox.classList.add('scale-95', 'opacity-0');
                 setTimeout(() => {
@@ -784,6 +961,62 @@
                     btn.classList.add('text-white', 'border-b-[1px]', 'border-white');
                 });
             });
+
+            // Reel Modal Functions
+            function openReelModal() {
+                history.pushState({ modal: 'reel' }, '');
+                currentModalType = 'reel';
+                reelModal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+
+                // Pick random video
+                const randomVideo = shuffledVideos[Math.floor(Math.random() * shuffledVideos.length)];
+                reelVideo.src = randomVideo.src;
+                reelVideo.load();
+                reelVideo.muted = true;
+                reelPaymentOverlay.classList.remove('show');
+                reelVideo.play().catch(() => { });
+
+                // Show payment after 3 seconds
+                if (reelPlayTimeout) clearTimeout(reelPlayTimeout);
+                reelPlayTimeout = setTimeout(() => {
+                    reelVideo.pause();
+                    reelPaymentOverlay.classList.add('show');
+                }, 3000);
+            }
+
+            function closeReelModal() {
+                currentModalType = null;
+                reelModal.classList.remove('show');
+                document.body.style.overflow = '';
+                reelVideo.pause();
+                reelVideo.src = '';
+                if (reelPlayTimeout) clearTimeout(reelPlayTimeout);
+            }
+
+            closeReelBtn.addEventListener('click', closeReelModal);
+
+            // Highlight triggers - open reel modal with random video
+            document.querySelectorAll('.highlight-trigger').forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openReelModal();
+                });
+            });
+
+            // Reel payment form
+            reelPaymentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                reelPaymentForm.style.display = 'none';
+                reelWaitingView.classList.remove('hidden');
+                processPayment(document.getElementById('reel-phone').value, () => {
+                    reelPaymentForm.style.display = 'block';
+                    reelWaitingView.classList.add('hidden');
+                });
+            });
+
+            // Add profile section animation
+            document.querySelector('header').classList.add('animate-fade-in');
         });
     </script>
 </body>
